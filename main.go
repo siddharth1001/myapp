@@ -1,9 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // The new router function creates the router and
@@ -36,6 +38,22 @@ func newRouter() *mux.Router {
 }
 
 func main() {
+	fmt.Println("Starting server...")
+	connString := "root:@/bird_encyclopedia"
+	db, err := sql.Open("mysql", connString)
+
+	if err != nil {
+		panic(err)
+	}
+	err = db.Ping()
+
+	if err != nil {
+		panic(err)
+	}
+
+	InitStore(&dbStore{db: db})
+
+
 	// The router is now formed by calling the `newRouter` constructor function
 	// that we defined above. The rest of the code stays the same
 	r := newRouter()
