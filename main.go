@@ -63,7 +63,7 @@ func main() {
 func rootResponseHandler(w http.ResponseWriter, r *http.Request) {
 	var responseString = `
 				{
-					"name": "BirdEncyclopedia",
+					"app name": "Bird Encyclopedia",
 					"author": "Siddharth Rawat"
 				}`
 	_, _ = fmt.Fprintf(w, responseString)
