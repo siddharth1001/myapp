@@ -3,9 +3,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"net/http"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 // The new router function creates the router and
@@ -34,6 +34,7 @@ func newRouter() *mux.Router {
 	r.HandleFunc("/bird", getBirdHandler).Methods("GET")
 	r.HandleFunc("/bird", createBirdHandler).Methods("POST")
 
+	r.HandleFunc("/", rootResponseHandler).Methods("GET")
 	return r
 }
 
@@ -53,13 +54,21 @@ func main() {
 
 	InitStore(&dbStore{db: db})
 
-
 	// The router is now formed by calling the `newRouter` constructor function
 	// that we defined above. The rest of the code stays the same
 	r := newRouter()
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":8090", r)
+}
+
+func rootResponseHandler(w http.ResponseWriter, r *http.Request) {
+	var responseString = `
+				{
+					"name": "BirdEncyclopedia",
+					"author": "Siddharth Rawat"
+				}`
+	_, _ = fmt.Fprintf(w, responseString)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World !!!!!")
+	fmt.Fprintf(w, "Hello there !!!!!")
 }

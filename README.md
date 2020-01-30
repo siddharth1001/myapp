@@ -11,3 +11,10 @@ CREATE TABLE birds (
   description varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
+
+# Build and Run
+
+go build
+./myapp
+
+http://localhost:8090/
