@@ -15,6 +15,7 @@ CREATE TABLE birds (
 # Build and Run
 
 go build
+
 ./myapp
 
 http://localhost:8090/
