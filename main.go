@@ -3,9 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
+	"os"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 // The new router function creates the router and
@@ -40,7 +42,15 @@ func newRouter() *mux.Router {
 
 func main() {
 	fmt.Println("Starting server...")
-	connString := "root:@/bird_encyclopedia"
+	var connString = "root:@/bird_encyclopedia"
+	if os.Getenv("CONNSTRING") != "" {
+		connString = os.Getenv("CONNSTRING")
+		fmt.Println("connString is ", connString)
+		// "myuser:root123@tcp(mysql-db:3306)/bird_encyclopedia"
+	} else {
+		fmt.Println("NO connString. Connect to local")
+	}
+
 	db, err := sql.Open("mysql", connString)
 
 	if err != nil {
@@ -49,6 +59,9 @@ func main() {
 	err = db.Ping()
 
 	if err != nil {
+		// TODO: Getting connection refused 70% of times. Need to find the root cause!
+		// Even root:root@tcp(mysql-db:3306)/bird_encyclopedia is not working
+		fmt.Println("========= PING ERROR!")
 		panic(err)
 	}
 
@@ -64,7 +77,7 @@ func rootResponseHandler(w http.ResponseWriter, r *http.Request) {
 	var responseString = `
 				{
 					"app name": "Bird Encyclopedia",
-					"author": "Siddharth Rawat"
+					"author": "Siddharth Rawat",
 				}`
 	_, _ = fmt.Fprintf(w, responseString)
 }

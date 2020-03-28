@@ -1,0 +1,23 @@
+version: '3'
+services: 
+    mysql-db:
+        image: mysql:8.0.17
+        command: --init-file /data/application/init.sql
+        volumes:
+            - ./init.sql:/data/application/init.sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=myuser
+            - MYSQL_PASSWORD=WonderfulDay
+            - MYSQL_DATABASE=bird_encyclopedia
+        ports:
+            - "3309:3306"
+    go-app:
+        environment:
+            - CONNSTRING="myuser:WonderfulDay@tcp(mysql-db:3306)/bird_encyclopedia"
+        build: .
+        ports:
+            - "8090:8090"
+        depends_on:
+            - "mysql-db"
+        # restart: unless-stopped
