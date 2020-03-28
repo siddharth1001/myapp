@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS birds (
   description varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
+
+-- GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%';
