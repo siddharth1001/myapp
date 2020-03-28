@@ -2,11 +2,20 @@
 
 First Go app - Bird Encyclopedia
 
-# create database
+## 1. Docker:
+```
+docker-compose -up
+
+http://localhost:8090/
+```
+
+## 2. Non Docker:
+
+### create database
 ```
 CREATE DATABASE bird_encyclopedia;
 ```
-# create table
+### create table
 ```
 CREATE TABLE birds (
   id INT NOT NULL AUTO_INCREMENT,
@@ -15,7 +24,7 @@ CREATE TABLE birds (
   PRIMARY KEY (id)
 );
 ```
-# Build and Run
+### Build and Run
 ```
 go build
 
@@ -23,3 +32,4 @@ go build
 
 http://localhost:8090/
 ```
+
