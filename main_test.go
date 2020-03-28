@@ -40,7 +40,7 @@ func TestRouter(t *testing.T) {
 	}
 	// convert the bytes to a string
 	respString := string(b)
-	expected := "Hello World !!!!!"
+	expected := "Hello there !!!!!"
 
 	// We want our response to match the one defined in our handler.
 	// If it does happen to be "Hello world!", then it confirms, that the
@@ -109,4 +109,3 @@ func TestStaticFileServer(t *testing.T) {
 	}
 
 }
-
