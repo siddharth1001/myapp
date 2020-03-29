@@ -4,7 +4,7 @@ First Go app - Bird Encyclopedia
 
 ## 1. Docker:
 ```
-docker-compose -up
+docker-compose up
 
 http://localhost:8090/
 ```
