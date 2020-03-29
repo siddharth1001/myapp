@@ -1,5 +1,7 @@
 # myapp
 
+[![Build Status](https://travis-ci.com/siddharth1001/myapp.svg?branch=master)](https://travis-ci.com/siddharth1001/myapp)
+
 First Go app - Bird Encyclopedia
 
 ## 1. Docker:
