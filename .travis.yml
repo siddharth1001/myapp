@@ -6,4 +6,5 @@ before_install:
     - docker build -t siddharth1001/myapp -f DockerFile.test .
 
 script:
+    - ls
     - docker run siddharth1001/myapp go test
