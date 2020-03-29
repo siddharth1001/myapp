@@ -1,8 +1,6 @@
 FROM golang:1.13
 
-LABEL maintainer="siddharth.rawat1001@gmail.com"
-
-# WORKDIR /mygoapp
+WORKDIR /mygoapp
 
 COPY go.mod go.mod
 COPY go.sum go.sum
